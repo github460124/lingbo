@@ -22,6 +22,11 @@ class _BottomNavigatorState extends State<BottomNavigator> {
     return Scaffold(
       body: PageView(
         controller: _controller,
+        onPageChanged: (index) {
+          setState(() {
+            _currentIndex = index;
+          });
+        },
         children: <Widget>[
           //需要显示的页面
           HomePage(),
