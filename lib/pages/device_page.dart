@@ -7,11 +7,3 @@ class DevicePage extends StatefulWidget {
     return null;
   }
 }
-
-class _DevicePageState extends State<DevicePage> {
-  @override
-  Widget build(BuildContext context) {
-    // TODO: implement build
-    return Scaffold();
-  }
-}

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 const homeImage = "http://47.102.214.210/image/house.jpg";
+const fontFamily = "SourceHanSansSC";
 
 class MyPage extends StatefulWidget {
   @override
@@ -8,146 +9,308 @@ class MyPage extends StatefulWidget {
 }
 
 class _MyPageState extends State<MyPage> {
-  double appBarAlpha = 0;
-
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
     return Scaffold(
-      //appBar: AppBar(),
-      body: Stack(
-        children: <Widget>[
-          MediaQuery.removePadding(
-            removeTop: true,
-            removeRight: true,
-            removeLeft: true,
-            context: context,
-            child: NotificationListener(
-              onNotification: (scrollNotification) {
-                if (scrollNotification is ScrollUpdateNotification &&
-                    scrollNotification.depth == 0) {
-                  _onScroll(scrollNotification.metrics.pixels);
-                }
-              },
-              child: Container(
-                child: ListView(
-                  children: <Widget>[
-                    Stack(
-                      children: <Widget>[
-                        SizedBox(
-                          height: 256,
-                          child: Image.network(
-                            homeImage,
-                            fit: BoxFit.fill,
-                            width: MediaQuery.of(context).size.width,
-                          ),
-                        ),
-                        Positioned(
-                          top: 80,
-                          left: 140,
-                          child: ClipOval(
-                            //clipBehavior: Clip.antiAlias,
-                            child: Image.asset(
-                              "lib/image/tx.png",
-                              fit: BoxFit.cover,
-                              width: 120,
-                              height: 120,
-                            ),
-                          ),
-                        ),
-                      ],
+      body: SafeArea(
+        child: CustomScrollView(
+          physics: ScrollPhysics(),
+          shrinkWrap: true,
+          slivers: <Widget>[
+            SliverPadding(
+              padding: EdgeInsets.all(0),
+              sliver: SliverList(
+                delegate: SliverChildListDelegate(<Widget>[
+                  Container(
+                    padding: EdgeInsets.only(top: 40, left: 10, right: 10),
+                    child: Center(
+                      child: Column(
+                        children: <Widget>[
+                          MyPageHeader(),
+                          MyPageBody(),
+//                          SizedBox(
+//                            height: 800,
+//                          ),
+                        ],
+                      ),
                     ),
-                    getListTitle(0),
-                    getListTitle(1),
-                    getListTitle(2),
-                    getListTitle(3),
-                    getListTitle(4),
-                    getListTitle(5),
+                  ),
+                ]),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class MyPageHeader extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    // TODO: implement build
+    return Container(
+      padding: EdgeInsets.only(top: 40),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: <Widget>[
+              Container(
+                padding: EdgeInsets.only(left: 20),
+                alignment: Alignment.centerLeft,
+                child: Column(
+                  //mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
                     Container(
-                      child: SizedBox(
-                        height: 800,
+                      child: Text(
+                        'MyHouse',
+                        style: TextStyle(
+                            fontFamily: fontFamily,
+                            fontSize: 26,
+                            fontWeight: FontWeight.bold),
+                        textAlign: TextAlign.left,
+                      ),
+                    ),
+                    Container(
+                      child: Text(
+                        'EDIT PROFILES',
+                        style: TextStyle(fontFamily: fontFamily, fontSize: 16),
                       ),
                     ),
                   ],
                 ),
               ),
-            ),
-          ),
-          Opacity(
-            opacity: appBarAlpha,
-            child: SizedBox(
-              height: 80,
-              child: AppBar(
-                title: Text('个人信息'),
+              Container(
+                padding: EdgeInsets.only(right: 20),
+                alignment: Alignment.centerRight,
+                child: CircleAvatar(
+                  //child: Image.asset('lib/image/tx.png'),
+                  backgroundImage: NetworkImage(homeImage),
+                  radius: 30,
+                ),
               ),
+            ],
+          ),
+          Container(
+            padding: EdgeInsets.only(left: 20, top: 40),
+            child: Column(
+              children: <Widget>[
+                Container(
+                  child: Text(
+                    'LAKE HOUSE SETTINGS',
+                    style: TextStyle(
+                        fontFamily: fontFamily,
+                        fontSize: 16,
+                        color: Colors.grey),
+                  ),
+                ),
+                Container(
+                  child: Text(
+                    'You are a house admin',
+                    style: TextStyle(fontFamily: fontFamily, fontSize: 16),
+                  ),
+                ),
+              ],
             ),
           ),
         ],
       ),
     );
   }
-
-  _onScroll(double pixels) {
-    double alpha = pixels / 180;
-    if (alpha > 1) alpha = 1;
-    if (alpha < 0) alpha = 0;
-    setState(() {
-      appBarAlpha = alpha;
-    });
-  }
-
-  Widget getListTitle(i) {
-    return myListTitle[i];
-  }
-
-  List<Widget> myListTitle = <Widget>[
-    ListTile(
-      title: Text(
-        '用户',
-        style: TextStyle(fontSize: 20),
-      ),
-      leading: Icon(Icons.star_border),
-      trailing: Icon(Icons.camera),
-    ),
-    ListTile(
-      title: Text(
-        '用户',
-        style: TextStyle(fontSize: 20),
-      ),
-      leading: Icon(Icons.star_border),
-      trailing: Icon(Icons.camera),
-    ),
-    ListTile(
-      title: Text(
-        '用户',
-        style: TextStyle(fontSize: 20),
-      ),
-      leading: Icon(Icons.star_border),
-      trailing: Icon(Icons.camera),
-    ),
-    ListTile(
-      title: Text(
-        '用户',
-        style: TextStyle(fontSize: 20),
-      ),
-      leading: Icon(Icons.star_border),
-      trailing: Icon(Icons.camera),
-    ),
-    ListTile(
-      title: Text(
-        '用户',
-        style: TextStyle(fontSize: 20),
-      ),
-      leading: Icon(Icons.star_border),
-      trailing: Icon(Icons.camera),
-    ),
-    ListTile(
-      title: Text(
-        '用户',
-        style: TextStyle(fontSize: 20),
-      ),
-      leading: Icon(Icons.star_border),
-      trailing: Icon(Icons.camera),
-    ),
-  ];
 }
+
+class MyPageBody extends StatefulWidget {
+  @override
+  _MyPageBody createState() => _MyPageBody();
+}
+
+class _MyPageBody extends State<MyPageBody> {
+  @override
+  Widget build(BuildContext context) {
+    // TODO: implement build
+    return ListView.builder(
+      shrinkWrap: true,
+      physics: NeverScrollableScrollPhysics(),
+      itemBuilder: (context, index) {
+        return myListTitle[index];
+      },
+      itemCount: myListTitle.length,
+    );
+  }
+}
+
+const double listTitleSize = 20; //标题字体大小
+const double listSubtitleSize = 16; //副标题大小
+const double listTitlePaddingTop = 30; //填充间距
+const double listTitleDividerHe = 1; //分割线高度
+
+List<Widget> myListTitle = <Widget>[
+  Container(
+    padding: EdgeInsets.only(top: listTitlePaddingTop),
+    child: GestureDetector(
+      onTap: () {
+        print('tap 000');
+      },
+      child: Container(
+        child: Column(
+          children: <Widget>[
+            ListTile(
+              title: Text(
+                'Users',
+                style: TextStyle(fontSize: listTitleSize),
+              ),
+              trailing: Icon(Icons.arrow_forward_ios),
+            ),
+            Divider(
+              color: Colors.grey,
+              height: listTitleDividerHe,
+              indent: 0,
+            ),
+          ],
+        ),
+      ),
+    ),
+  ),
+  Container(
+    padding: EdgeInsets.only(top: listTitlePaddingTop),
+    child: GestureDetector(
+      onTap: () {
+        print('tap 000');
+      },
+      child: Container(
+        child: Column(
+          children: <Widget>[
+            ListTile(
+              title: Text(
+                'Automation',
+                style: TextStyle(fontSize: listTitleSize),
+              ),
+              trailing: Icon(Icons.arrow_forward_ios),
+            ),
+            Divider(
+              color: Colors.grey,
+              height: listTitleDividerHe,
+              indent: 0,
+            ),
+          ],
+        ),
+      ),
+    ),
+  ),
+  Container(
+    padding: EdgeInsets.only(top: listTitlePaddingTop),
+    child: GestureDetector(
+      onTap: () {
+        print('tap 000');
+      },
+      child: Container(
+        child: Column(
+          children: <Widget>[
+            ListTile(
+              title: Text(
+                'Notifactions',
+                style: TextStyle(fontSize: listTitleSize),
+              ),
+              trailing: Icon(Icons.arrow_forward_ios),
+            ),
+            Divider(
+              color: Colors.grey,
+              height: listTitleDividerHe,
+              indent: 0,
+            ),
+          ],
+        ),
+      ),
+    ),
+  ),
+  Container(
+    padding: EdgeInsets.only(top: listTitlePaddingTop),
+    child: GestureDetector(
+      onTap: () {
+        print('tap 000');
+      },
+      child: Container(
+        child: Column(
+          children: <Widget>[
+            ListTile(
+              title: Text(
+                'Licence',
+                style: TextStyle(fontSize: listTitleSize),
+              ),
+              subtitle: Text('Standard (no remote access)'),
+              trailing: Icon(Icons.arrow_forward_ios),
+            ),
+            Divider(
+              color: Colors.grey,
+              height: listTitleDividerHe,
+              indent: 0,
+            ),
+          ],
+        ),
+      ),
+    ),
+  ),
+  Container(
+    child: Text(
+      "about LingBo",
+      style: TextStyle(color: Colors.grey, fontFamily: 'siyuan', fontSize: 16),
+    ),
+    padding: EdgeInsets.only(top: 60, left: 20),
+  ),
+  Container(
+    padding: EdgeInsets.only(top: listTitlePaddingTop),
+    child: GestureDetector(
+      onTap: () {
+        print('tap 000');
+      },
+      child: Container(
+        child: Column(
+          children: <Widget>[
+            ListTile(
+              title: Text(
+                'About LingBo',
+                style: TextStyle(fontSize: listTitleSize),
+              ),
+              trailing: Icon(Icons.arrow_forward_ios),
+            ),
+            Divider(
+              color: Colors.grey,
+              height: listTitleDividerHe,
+              indent: 0,
+            ),
+          ],
+        ),
+      ),
+    ),
+  ),
+  Container(
+    padding: EdgeInsets.only(top: listTitlePaddingTop),
+    child: GestureDetector(
+      onTap: () {
+        print('tap 000');
+      },
+      child: Container(
+        child: Column(
+          children: <Widget>[
+            ListTile(
+              title: Text(
+                'Legal',
+                style: TextStyle(fontSize: listTitleSize),
+              ),
+              trailing: Icon(Icons.arrow_forward_ios),
+            ),
+            Divider(
+              color: Colors.grey,
+              height: listTitleDividerHe,
+              indent: 0,
+            ),
+          ],
+        ),
+      ),
+    ),
+  ),
+];

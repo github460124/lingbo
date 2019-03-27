@@ -1,0 +1,244 @@
+{  
+  "roomList": [
+    {
+      "roomName": "living room",
+      "roomImage": "http://47.102.214.210/image/living_room.jpg",
+      "floor":1,
+      "favoriteRoom":true
+    },
+    {
+        "roomName": "dinner room",
+        "roomImage": "http://47.102.214.210/image/dinner_room.jpg",
+        "floor":1,
+        "favoriteRoom":false
+    },
+    {
+        "roomName": "bed room",
+        "roomImage": "http://47.102.214.210/image/bed_room.jpg",
+        "floor":1,
+        "favoriteRoom":true
+    },
+    {
+        "roomName": "garge",
+        "roomImage": "http://47.102.214.210/image/car_room.jpg",
+        "floor":0,
+        "favoriteRoom":false
+    }
+  ],
+  "device": {
+      "livingRoom":{
+        "senceList":[
+            {
+                "id":1,
+                "name":"灯光全开"
+            },
+            {
+                "id":2,
+                "name":"灯光全关"
+            },
+            {
+                "id":3,
+                "name":"睡眠"
+            },
+            {
+                "id":4,
+                "name":"早安"
+            }
+        ],
+        "lightList":[
+            {
+                "id":1,
+                "dim_enable": false,
+                "color_enable": false,
+                "name":"筒灯"
+            },
+            {
+                "id":2,
+                "dim_enable": false,
+                "color_enable": false,
+                "name":"灯带"
+            },
+            {
+                "id":3,
+                "dim_enable": false,
+                "color_enable": false,
+                "name":"主灯"
+            },
+            {
+                "id":4,
+                "dim_enable": false,
+                "color_enable": false,
+                "name":"壁灯"
+            }
+        ],
+        "shadeList":[
+            {
+                "id":1,
+                "name":"窗帘"
+            },
+            {
+                "id":2,
+                "name":"纱帘"
+            }
+        ],
+        "acList":[
+            {
+                "id":1,
+                "name":"空调"
+            }
+        ],
+        "warmList":[
+            {
+                "id":1,
+                "name":"地暖"
+            }
+        ]
+      },
+      "bedRoom":{
+        "senceList":[
+            {
+                "id":1,
+                "name":"灯光全开"
+            },
+            {
+                "id":2,
+                "name":"灯光全关"
+            },
+            {
+                "id":3,
+                "name":"睡眠"
+            },
+            {
+                "id":4,
+                "name":"早安"
+            }
+        ],
+        "lightList":[
+            {
+                "id":1,
+                "dim_enable": false,
+                "color_enable": false,
+                "name":"筒灯"
+            },
+            {
+                "id":2,
+                "dim_enable": false,
+                "color_enable": false,
+                "name":"灯带"
+            }
+            
+        ],
+        "shadeList":[
+            {
+                "id":1,
+                "name":"窗帘"
+            },
+            {
+                "id":2,
+                "name":"纱帘"
+            }
+        ],
+        "acList":[
+            {
+                "id":1,
+                "name":"空调"
+            }
+        ],
+        "warmList":[
+            {
+                "id":1,
+                "name":"地暖"
+            }
+        ]
+      },
+      "carRoom":{
+        "senceList":[
+            {
+                "id":1,
+                "name":"灯光全开"
+            },
+            {
+                "id":2,
+                "name":"灯光全关"
+            }
+        ],
+        "lightList":[
+            {
+                "id":1,
+                "dim_enable": false,
+                "color_enable": false,
+                "name":"筒灯"
+            }
+        ]
+      },
+      "dinnerRoom":{
+        "senceList":[
+            {
+                "id":1,
+                "name":"灯光全开"
+            },
+            {
+                "id":2,
+                "name":"灯光全关"
+            },
+            {
+                "id":3,
+                "name":"睡眠"
+            },
+            {
+                "id":4,
+                "name":"早安"
+            }
+        ],
+        "lightList":[
+            {
+                "id":1,
+                "dim_enable": false,
+                "color_enable": false,
+                "name":"筒灯"
+            },
+            {
+                "id":2,
+                "dim_enable": false,
+                "color_enable": false,
+                "name":"灯带"
+            },
+            {
+                "id":3,
+                "dim_enable": false,
+                "color_enable": false,
+                "name":"主灯"
+            },
+            {
+                "id":4,
+                "dim_enable": false,
+                "color_enable": false,
+                "name":"壁灯"
+            }
+        ],
+        "shadeList":[
+            {
+                "id":1,
+                "name":"窗帘"
+            },
+            {
+                "id":2,
+                "name":"纱帘"
+            }
+        ],
+        "acList":[
+            {
+                "id":1,
+                "name":"空调"
+            }
+        ],
+        "warmList":[
+            {
+                "id":1,
+                "name":"地暖"
+            }
+        ]
+      }
+      
+    }
+}

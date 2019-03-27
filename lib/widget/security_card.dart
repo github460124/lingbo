@@ -1,33 +1,35 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 ///安防设备卡片入口
+const customFontFamily = "SourceHanSansSC";
 
 class SecurityCard extends StatelessWidget {
+  ScreenUtil s = ScreenUtil();
   @override
   Widget build(BuildContext context) {
+    ScreenUtil.instance = ScreenUtil()..init(context);
+
     // TODO: implement build
     return Container(
-      margin: EdgeInsets.only(top: 40),
+      margin: EdgeInsets.only(top: s.setHeight(100)),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
+          _title,
           Container(
-            //title
-            alignment: Alignment.topLeft,
-            child: Text(
-              "安防设备",
-              style: TextStyle(fontSize: 20, color: Colors.blueGrey),
+            margin: EdgeInsets.only(
+              top: s.setHeight(60),
+//                left: s.setWidth(61),
+//                right: s.setWidth(61)
             ),
-          ),
-          Container(
-            margin: EdgeInsets.only(top: 16),
             color: Colors.white,
             alignment: Alignment.center,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 Card(
-                  elevation: 5,
+                  elevation: 2,
                   child: SizedBox(
                     height: 180,
                     child: Row(
@@ -43,7 +45,13 @@ class SecurityCard extends StatelessWidget {
                                 flex: 3,
                               ),
                               Expanded(
-                                child: Text('已布防'),
+                                child: Text(
+                                  '已布防',
+                                  style: TextStyle(
+                                      fontSize: s.setSp(40),
+                                      fontFamily: customFontFamily,
+                                      fontWeight: FontWeight.normal),
+                                ),
                                 flex: 1,
                               ),
                               Expanded(
@@ -71,7 +79,13 @@ class SecurityCard extends StatelessWidget {
                                       ),
                                       onPressed: null,
                                     ),
-                                    Text('布防'),
+                                    Text(
+                                      '布防',
+                                      style: TextStyle(
+                                          fontSize: s.setSp(40),
+                                          fontFamily: customFontFamily,
+                                          fontWeight: FontWeight.normal),
+                                    ),
                                   ],
                                 ),
                               ),
@@ -85,7 +99,13 @@ class SecurityCard extends StatelessWidget {
                                       ),
                                       onPressed: null,
                                     ),
-                                    Text('撤防'),
+                                    Text(
+                                      '撤防',
+                                      style: TextStyle(
+                                          fontSize: s.setSp(40),
+                                          fontFamily: customFontFamily,
+                                          fontWeight: FontWeight.normal),
+                                    ),
                                   ],
                                 ),
                               ),
@@ -97,7 +117,7 @@ class SecurityCard extends StatelessWidget {
                   ),
                 ),
                 Card(
-                  elevation: 5,
+                  elevation: 2,
                   child: SizedBox(
                     height: 180,
                     child: Row(
@@ -113,7 +133,13 @@ class SecurityCard extends StatelessWidget {
                                 flex: 3,
                               ),
                               Expanded(
-                                child: Text('已布防'),
+                                child: Text(
+                                  '已布防',
+                                  style: TextStyle(
+                                      fontSize: s.setSp(40),
+                                      fontFamily: customFontFamily,
+                                      fontWeight: FontWeight.normal),
+                                ),
                                 flex: 1,
                               ),
                               Expanded(
@@ -141,7 +167,13 @@ class SecurityCard extends StatelessWidget {
                                       ),
                                       onPressed: null,
                                     ),
-                                    Text('布防'),
+                                    Text(
+                                      '布防',
+                                      style: TextStyle(
+                                          fontSize: s.setSp(40),
+                                          fontFamily: customFontFamily,
+                                          fontWeight: FontWeight.normal),
+                                    ),
                                   ],
                                 ),
                               ),
@@ -170,6 +202,22 @@ class SecurityCard extends StatelessWidget {
             ),
           ),
         ],
+      ),
+    );
+  }
+
+  Widget get _title {
+    return Container(
+      margin: EdgeInsets.only(left: s.setWidth(54)),
+      alignment: Alignment.topLeft,
+      child: Text(
+        "安防设备",
+        textAlign: TextAlign.start,
+        style: TextStyle(
+            letterSpacing: 1,
+            fontSize: s.setSp(32),
+            fontFamily: customFontFamily,
+            fontWeight: FontWeight.normal),
       ),
     );
   }

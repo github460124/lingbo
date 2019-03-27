@@ -60,11 +60,11 @@ class _BottomNavigatorState extends State<BottomNavigator> {
                 )),
             BottomNavigationBarItem(
                 icon: Icon(
-                  Icons.hotel,
+                  Icons.apps,
                   color: _defaultColor,
                 ),
                 activeIcon: Icon(
-                  Icons.hotel,
+                  Icons.apps,
                   color: _activeColor,
                 ),
                 title: Text(
