@@ -5,21 +5,23 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 const customFontFamily = "SourceHanSansSC";
 
 class SecurityCard extends StatelessWidget {
-  ScreenUtil s = ScreenUtil();
+  final VoidCallback onTap1;
+  final VoidCallback onTap2;
+
+  const SecurityCard({Key key, this.onTap1, this.onTap2}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     ScreenUtil.instance = ScreenUtil()..init(context);
-
     // TODO: implement build
     return Container(
-      margin: EdgeInsets.only(top: s.setHeight(100)),
+      margin: EdgeInsets.only(top: ScreenUtil().setHeight(100)),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           _title,
           Container(
               margin: EdgeInsets.only(
-                top: s.setHeight(60),
+                top: ScreenUtil().setHeight(60),
               ),
               color: Colors.white,
               alignment: Alignment.center,
@@ -27,7 +29,7 @@ class SecurityCard extends StatelessWidget {
                 children: <Widget>[
                   Row(
                     children: <Widget>[
-                      _bigCard,
+                      getBigCard(onTap1),
                       Expanded(
                         child: Column(
                           children: <Widget>[_smallCard, _smallCard],
@@ -39,7 +41,7 @@ class SecurityCard extends StatelessWidget {
                     elevation: 5,
                     child: Row(
                       children: <Widget>[
-                        _bigCard,
+                        getBigCard(onTap2),
                         Expanded(
                           child: Column(
                             children: <Widget>[_smallCard, _smallCard],
@@ -57,100 +59,105 @@ class SecurityCard extends StatelessWidget {
 
   Widget get _title {
     return Container(
-      margin: EdgeInsets.only(left: s.setWidth(54)),
+      margin: EdgeInsets.only(left: ScreenUtil().setWidth(54)),
       alignment: Alignment.topLeft,
       child: Text(
         "安防设备",
         textAlign: TextAlign.start,
         style: TextStyle(
             letterSpacing: 1,
-            fontSize: s.setSp(32),
+            fontSize: ScreenUtil().setSp(32),
             fontFamily: customFontFamily,
             fontWeight: FontWeight.normal),
       ),
     );
   }
 
-  Widget get _bigCard {
-    return Card(
-      child: Container(
-        width: s.setWidth(537),
-        height: s.setHeight(360),
-        color: Colors.white,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: <Widget>[
-            Container(
-              alignment: Alignment.topRight,
-              padding: EdgeInsets.only(
-                right: s.setWidth(52),
-                top: s.setHeight(46),
-              ),
-              child: Icon(
-                Icons.more_horiz,
-                size: s.setHeight(67),
-              ),
-            ),
-            Container(
-              alignment: Alignment.center,
-              padding: EdgeInsets.fromLTRB(
-                  s.setWidth(128), s.setHeight(5), s.setWidth(128), 0),
-              child: Row(
-                children: <Widget>[
-                  Icon(
-                    Icons.security,
-                    size: s.setHeight(67),
-                    color: Colors.yellow,
+  Widget getBigCard(VoidCallback onTap) {
+    return
+      InkWell(
+        onTap: onTap,
+        child: Card(
+          child: Container(
+            width: ScreenUtil().setWidth(537),
+            height: ScreenUtil().setHeight(360),
+            color: Colors.white,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: <Widget>[
+                Container(
+                  alignment: Alignment.topRight,
+                  padding: EdgeInsets.only(
+                    right: ScreenUtil().setWidth(52),
+                    top: ScreenUtil().setHeight(46),
                   ),
-                  Expanded(
-                    child: Column(
-                      children: <Widget>[
-                        Text(
-                          "安防",
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                              fontFamily: customFontFamily,
-                              fontSize: s.setSp(37)),
+                  child: Icon(
+                    Icons.more_horiz,
+                    size: ScreenUtil().setHeight(67),
+                  ),
+                ),
+                Container(
+                  alignment: Alignment.center,
+                  padding: EdgeInsets.fromLTRB(
+                      ScreenUtil().setWidth(128), ScreenUtil().setHeight(5), ScreenUtil().setWidth(128), 0),
+                  child: Row(
+                    children: <Widget>[
+                      Icon(
+                        Icons.security,
+                        size: ScreenUtil().setHeight(67),
+                        color: Colors.yellow,
+                      ),
+                      Expanded(
+                        child: Column(
+                          children: <Widget>[
+                            Text(
+                              "安防",
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                  fontFamily: customFontFamily,
+                                  fontSize:ScreenUtil().setSp(37)),
+                            ),
+                            Container(
+                              margin: EdgeInsets.only(top: ScreenUtil().setWidth(12)),
+                              child: Text(
+                                "已布防",
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                    fontFamily: customFontFamily,
+                                    fontSize: ScreenUtil().setSp(24)),
+                              ),
+                            ),
+                          ],
                         ),
-                        Container(
-                          margin: EdgeInsets.only(top: s.setWidth(12)),
-                          child: Text(
-                            "已布防",
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                                fontFamily: customFontFamily,
-                                fontSize: s.setSp(24)),
-                          ),
-                        ),
-                      ],
-                    ),
-                  )
-                ],
-              ),
+                      )
+                    ],
+                  ),
+                ),
+              ],
             ),
-          ],
+          ),
         ),
-      ),
-    );
+      );
+
   }
 
   Widget get _smallCard {
     return Container(
       color: Colors.white,
-      width: s.setWidth(537),
-      height: s.setHeight(180),
+      width: ScreenUtil().setWidth(537),
+      height: ScreenUtil().setHeight(180),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
           Container(
             alignment: Alignment.center,
             padding: EdgeInsets.fromLTRB(
-                s.setWidth(81), s.setHeight(47), s.setWidth(128), 0),
+                ScreenUtil().setWidth(81), ScreenUtil().setHeight(47), ScreenUtil().setWidth(128), 0),
             child: Row(
               children: <Widget>[
                 Icon(
                   Icons.security,
-                  size: s.setHeight(67),
+                  size: ScreenUtil().setHeight(67),
                   color: Colors.yellow,
                 ),
                 Expanded(
@@ -161,7 +168,7 @@ class SecurityCard extends StatelessWidget {
                         textAlign: TextAlign.center,
                         style: TextStyle(
                             fontFamily: customFontFamily,
-                            fontSize: s.setSp(37)),
+                            fontSize: ScreenUtil().setSp(37)),
                       ),
                     ],
                   ),

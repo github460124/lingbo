@@ -1,13 +1,19 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lingbo_app/dao/get_ip_dao.dart';
 import 'package:lingbo_app/dao/position_dao.dart';
+import 'package:lingbo_app/dao/weather_dao.dart';
 import 'package:lingbo_app/model/position_model.dart';
 import 'package:lingbo_app/model/get_ip_model.dart';
+import 'package:lingbo_app/model/weather_model_entity.dart';
+import 'package:lingbo_app/util/local_notification.dart';
 import 'package:lingbo_app/widget/home_top_container.dart';
 import 'package:lingbo_app/widget/monitor_card.dart';
 import 'package:lingbo_app/widget/scenes_card.dart';
 import 'package:lingbo_app/widget/security_card.dart';
+import 'package:lingbo_app/widget/wether_widget.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -19,11 +25,21 @@ class _HomePageState extends State<HomePage> {
   GetIpModel ipAddress; //ip model
   String ip = ""; //外网ip
 
+  Icon weatherIcon;
+  String code;
+  String temp;
+  String text;
+  WeatherModelResultsNow weatherinfo;
+
+  var flutterLocalNotificationsPlugin = new FlutterLocalNotificationsPlugin();
+  MyLocalNotification myLocalNotification=new MyLocalNotification();
   @override
   void initState() {
     super.initState();
+    myLocalNotification.init(context);
     getIp();
     getLocation();
+    loadDio();
   }
 
   getLocation() async {
@@ -55,6 +71,28 @@ class _HomePageState extends State<HomePage> {
     }
   }
 
+  loadDio() {
+    DioWeather.fetch().then((result) {
+      setState(() {
+        weatherinfo = result.now;
+        /*if (weatherinfo.code == null)
+          code = 'null';
+        else
+          code = weatherinfo.code;
+        if (weatherinfo.temperature == null)
+          temp = 'null';
+        else
+          temp = weatherinfo.temperature;*/
+        code = weatherinfo.code;
+        temp = weatherinfo.temperature;
+        text = weatherinfo.text;
+        print('weatherinfo:$weatherinfo');
+      });
+    }).catchError((e) {
+      print('e----$e');
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     ScreenUtil.instance = ScreenUtil()..init(context);
@@ -62,9 +100,12 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        title: Text("首页"),
+        title: WeatherWidget(
+          code: code,
+          temp: temp,
+          text: text,
+        ),
         //centerTitle: true,
-        //leading: WeatherWidget(weatherModleResult: weatherinfo,),
       ),
       body: Stack(
         children: <Widget>[
@@ -93,7 +134,7 @@ class _HomePageState extends State<HomePage> {
                                 ),
                               ),
                               Container(
-                                child: SecurityCard(),
+                                child: SecurityCard(onTap1: onTap1,onTap2: onTap2,),
                               ),
                               Container(
                                 child: MonitorCard(),
@@ -207,5 +248,12 @@ class _HomePageState extends State<HomePage> {
             ),
           );
         });
+  }
+
+  onTap1() {
+    myLocalNotification.showNotification("1",' 来自安防1的消息','安防1已布防');
+  }
+  onTap2() {
+    myLocalNotification.showNotification("1",' 来自安防2的消息','安防2已布防');
   }
 }

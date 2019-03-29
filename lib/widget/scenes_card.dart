@@ -43,17 +43,19 @@ class _ScenesCardState extends State<ScenesCard> {
                     children: <Widget>[
                       _scenesCard,
                       Container(
+                        padding: EdgeInsets.only(left: s.setWidth(34)),
                         child: _scenesCard,
-                      )
+                      ),
                     ],
                   ),
                   Container(
-                    margin: EdgeInsets.only(top: s.setHeight(5)),
+                    margin: EdgeInsets.only(top: s.setHeight(25)),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: <Widget>[
                         _scenesCard,
                         Container(
+                          padding: EdgeInsets.only(left: s.setWidth(34)),
                           child: _scenesCard,
                         )
                       ],
@@ -68,7 +70,8 @@ class _ScenesCardState extends State<ScenesCard> {
 
   Widget get _title {
     return Container(
-      margin: EdgeInsets.only(left: s.setWidth(54)),
+      color: Colors.white,
+      padding: EdgeInsets.only(left: s.setWidth(54),top: s.setHeight(50)),
       alignment: Alignment.topLeft,
       child: Text(
         "家庭场景",
@@ -83,12 +86,14 @@ class _ScenesCardState extends State<ScenesCard> {
   }
 
   Widget get _scenesCard {
-    return Card(
-      elevation: 2,
+    return Container(
+      //elevation: 2,
+      //decoration: BoxDecoration(border: Border.all(width: 0.1)),
       child: Container(
+        color: Colors.white,
         width: s.setWidth(514),
         height: s.setHeight(203),
-        color: Colors.white,
+        //color: Colors.white,
         child: Container(
           alignment: Alignment.center,
           margin: EdgeInsets.fromLTRB(s.setWidth(134), 0, 0, 0),

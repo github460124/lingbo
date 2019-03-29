@@ -14,18 +14,17 @@ description: A new Flutter application.
 version: 1.0.0+1
 
 environment:
-  sdk: ">=2.1.0 <3.0.0 "
+  sdk: ">=2.0.0 <3.0.0 "
 
 dependencies:
   flutter:
     sdk: flutter
   flutter_gallery_assets: 0.1.8
-
   flutter_screenutil: ^0.4.2
-  fancy_bottom_navigation: ^0.3.2
   flutter_easyrefresh: ^1.2.7
   flare_flutter: ^1.2.0
-
+  dio: ^2.1.0
+  flutter_local_notifications: ^0.4.4+2
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^0.1.2
@@ -49,10 +48,51 @@ flutter:
   # the material Icons class.
   uses-material-design: true
   assets:
+  - image/0.png
+  - image/1.png
+  - image/2.png
+  - image/3.png
+  - image/4.png
+  - image/5.png
+  - image/6.png
+  - image/7.png
+  - image/8.png
+  - image/9.png
+  - image/10.png
+  - image/11.png
+  - image/12.png
+  - image/13.png
+  - image/14.png
+  - image/15.png
+  - image/16.png
+  - image/17.png
+  - image/18.png
+  - image/19.png
+  - image/20.png
+  - image/21.png
+  - image/22.png
+  - image/23.png
+  - image/24.png
+  - image/25.png
+  - image/26.png
+  - image/27.png
+  - image/28.png
+  - image/29.png
+  - image/30.png
+  - image/31.png
+  - image/32.png
+  - image/33.png
+  - image/34.png
+  - image/35.png
+  - image/36.png
+  - image/37.png
+  - image/38.png
+  - image/99.png
+
+
   - packages/flutter_gallery_assets/places/india_thanjavur_market.png
   - packages/flutter_gallery_assets/places/india_tanjore_thanjavur_temple.png
   - packages/flutter_gallery_assets/places/india_chettinad_silk_maker.png
-  - assets/flare/
     # To add assets to your application, add an assets section, like this:
     # assets:
     #  - images/a_dot_burr.jpeg

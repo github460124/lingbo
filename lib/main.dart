@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:lingbo_app/navigator/bottom_nvaigator.dart';
 
-void main() => runApp(MyApp());
+var flutterLocalNotificationsPlugin = new FlutterLocalNotificationsPlugin();
+void main() {
+  runApp(MyApp());
+}
 
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
