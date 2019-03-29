@@ -31,6 +31,7 @@ dependencies:
   cupertino_icons: ^0.1.2
   http: ^0.12.0+1
 
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -51,6 +52,7 @@ flutter:
   - packages/flutter_gallery_assets/places/india_thanjavur_market.png
   - packages/flutter_gallery_assets/places/india_tanjore_thanjavur_temple.png
   - packages/flutter_gallery_assets/places/india_chettinad_silk_maker.png
+  - assets/flare/
     # To add assets to your application, add an assets section, like this:
     # assets:
     #  - images/a_dot_burr.jpeg

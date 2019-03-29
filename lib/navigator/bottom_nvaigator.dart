@@ -73,19 +73,20 @@ class _BottomNavigatorState extends State<BottomNavigator> {
                       color: _currentIndex != 1 ? _defaultColor : _activeColor),
                 )),
             BottomNavigationBarItem(
-                icon: Icon(
-                  Icons.account_circle,
-                  color: _defaultColor,
-                ),
-                activeIcon: Icon(
-                  Icons.account_circle,
-                  color: _activeColor,
-                ),
-                title: Text(
-                  '我的',
-                  style: TextStyle(
-                      color: _currentIndex != 2 ? _defaultColor : _activeColor),
-                )),
+              icon: Icon(
+                Icons.account_circle,
+                color: _defaultColor,
+              ),
+              activeIcon: Icon(
+                Icons.account_circle,
+                color: _activeColor,
+              ),
+              title: Text(
+                '我的',
+                style: TextStyle(
+                    color: _currentIndex != 2 ? _defaultColor : _activeColor),
+              ),
+            ),
           ]),
     );
   } //内部类

@@ -9,9 +9,15 @@ class RoomCard extends StatelessWidget {
   final String roomName;
   final int floor;
   final bool favoriteRoom;
+  final VoidCallback onTap;
 
   const RoomCard(
-      {Key key, this.roomImage, this.roomName, this.floor, this.favoriteRoom})
+      {Key key,
+      this.roomImage,
+      this.roomName,
+      this.floor,
+      this.favoriteRoom,
+      this.onTap})
       : super(key: key);
 
   @override
@@ -19,6 +25,7 @@ class RoomCard extends StatelessWidget {
     ScreenUtil.instance = ScreenUtil()..init(context);
     // TODO: implement build
     return GestureDetector(
+      onTap: onTap,
       child: Container(
         color: Colors.white,
         margin: EdgeInsets.only(bottom: ScreenUtil().setHeight(12)),
@@ -90,9 +97,12 @@ class RoomCard extends StatelessWidget {
                     left: ScreenUtil().setHeight(60)),
                 width: ScreenUtil.getInstance().setWidth(957),
                 height: ScreenUtil.getInstance().setHeight(225),
-                child: Image.network(
-                  roomImage,
-                  fit: BoxFit.cover,
+                child: Hero(
+                  tag: "$roomImage",
+                  child: Image.network(
+                    roomImage,
+                    fit: BoxFit.cover,
+                  ),
                 ),
               ),
             ],
@@ -101,7 +111,6 @@ class RoomCard extends StatelessWidget {
       ),
     );
   }
-
 //  _floorName(int floor) {
 //    String floorName;
 //    switch (floor) {
@@ -120,4 +129,5 @@ class RoomCard extends StatelessWidget {
 //    }
 //    return floorName;
 //  }
+
 }

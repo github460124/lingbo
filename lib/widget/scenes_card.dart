@@ -33,7 +33,7 @@ class _ScenesCardState extends State<ScenesCard> {
             _title, //卡片标题
             Container(
               margin: EdgeInsets.only(top: s.setHeight(60)),
-              color: Color(0xffeae8e9),
+              //color: Color(0xffeae8e9),
               alignment: Alignment.center,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
@@ -43,7 +43,6 @@ class _ScenesCardState extends State<ScenesCard> {
                     children: <Widget>[
                       _scenesCard,
                       Container(
-                        //margin: EdgeInsets.only(left: s.setWidth(6)),
                         child: _scenesCard,
                       )
                     ],
@@ -55,7 +54,6 @@ class _ScenesCardState extends State<ScenesCard> {
                       children: <Widget>[
                         _scenesCard,
                         Container(
-                          //margin: EdgeInsets.only(left: s.setWidth(6)),
                           child: _scenesCard,
                         )
                       ],
@@ -86,7 +84,7 @@ class _ScenesCardState extends State<ScenesCard> {
 
   Widget get _scenesCard {
     return Card(
-      elevation: 0,
+      elevation: 2,
       child: Container(
         width: s.setWidth(514),
         height: s.setHeight(203),
