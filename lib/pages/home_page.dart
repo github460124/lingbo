@@ -14,6 +14,7 @@ import 'package:lingbo_app/widget/scenes_card.dart';
 import 'package:lingbo_app/widget/security_card.dart';
 import 'package:lingbo_app/widget/wether_widget.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:lingbo_app/model/temp_model.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -129,8 +130,7 @@ class _HomePageState extends State<HomePage> {
                               ),
                               Container(
                                 child: ScenesCard(
-                                  icon: Icons.wb_sunny,
-                                  scenesName: "早上好",
+                                  sceneList: sence,
                                 ),
                               ),
                               Container(

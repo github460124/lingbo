@@ -5,10 +5,9 @@ const customFontFamily = "SourceHanSansSC";
 
 ///场景卡片入口
 class ScenesCard extends StatefulWidget {
-  final String scenesName; //场景名称
-  final IconData icon; //场景图标
+  final List sceneList;
 
-  const ScenesCard({Key key, this.scenesName, this.icon}) : super(key: key);
+  const ScenesCard({Key key, this.sceneList}) : super(key: key);
 
   @override
   _ScenesCardState createState() => _ScenesCardState();
@@ -25,7 +24,6 @@ class _ScenesCardState extends State<ScenesCard> {
   Widget build(BuildContext context) {
     // TODO: implement build
     ScreenUtil.instance = ScreenUtil()..init(context);
-
     return Container(
       child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -35,16 +33,26 @@ class _ScenesCardState extends State<ScenesCard> {
               margin: EdgeInsets.only(top: s.setHeight(60)),
               //color: Color(0xffeae8e9),
               alignment: Alignment.center,
-              child: Column(
+              child: GridView.count(
+                shrinkWrap: true,
+                crossAxisCount: 2,//每行item数量
+                physics: NeverScrollableScrollPhysics(),
+                mainAxisSpacing: 10,  //主轴间隔
+                crossAxisSpacing: 10,
+                childAspectRatio: 3 / 1,  //item宽高比
+                padding: EdgeInsets.all(5),
+                children: cardWidgetList,
+              ),
+              /*Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: <Widget>[
                   Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: <Widget>[
-                      _scenesCard,
+                      _scenesCard(widget.sceneList[0]),
                       Container(
                         padding: EdgeInsets.only(left: s.setWidth(34)),
-                        child: _scenesCard,
+                        child: _scenesCard(widget.sceneList[1]),
                       ),
                     ],
                   ),
@@ -53,25 +61,39 @@ class _ScenesCardState extends State<ScenesCard> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: <Widget>[
-                        _scenesCard,
+                        _scenesCard(widget.sceneList[2]),
                         Container(
                           padding: EdgeInsets.only(left: s.setWidth(34)),
-                          child: _scenesCard,
+                          child: _scenesCard(widget.sceneList[3]),
                         )
                       ],
                     ),
                   ),
                 ],
-              ),
+              ),*/
             ),
-          ]),
+          ]
+      ),
     );
+  }
+
+  List<Widget> cardWidgetList = new List();
+  @override
+  void initState() {
+    super.initState();
+    initCardWidgetList();
+  }
+
+  void initCardWidgetList() {
+    widget.sceneList.forEach((m) {
+      cardWidgetList.add(_scenesCard(m));
+    });
   }
 
   Widget get _title {
     return Container(
       color: Colors.white,
-      padding: EdgeInsets.only(left: s.setWidth(54),top: s.setHeight(50)),
+      padding: EdgeInsets.only(left: s.setWidth(54), top: s.setHeight(50)),
       alignment: Alignment.topLeft,
       child: Text(
         "家庭场景",
@@ -85,42 +107,53 @@ class _ScenesCardState extends State<ScenesCard> {
     );
   }
 
-  Widget get _scenesCard {
-    return Container(
+  Widget _scenesCard(Map m) {
+    return InkWell(
+      splashColor: Colors.grey[300],
+      onTap: () {},
       //elevation: 2,
       //decoration: BoxDecoration(border: Border.all(width: 0.1)),
       child: Container(
-        color: Colors.white,
-        width: s.setWidth(514),
-        height: s.setHeight(203),
-        //color: Colors.white,
-        child: Container(
+          decoration: BoxDecoration(border: Border.all(width: 0.1),color: Colors.grey[200]),
+          color: Colors.white,
           alignment: Alignment.center,
-          margin: EdgeInsets.fromLTRB(s.setWidth(134), 0, 0, 0),
+          //margin: EdgeInsets.fromLTRB(s.setWidth(134), 0, 0, 0),
           child: Row(
-            //mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              Icon(
-                widget.icon,
-                size: 26,
-                color: scenes1 ? Colors.yellow : Colors.grey,
-              ),
-              Container(
-                margin: EdgeInsets.only(left: 23),
-                child: Text(
-                  widget.scenesName,
-                  style: TextStyle(
-                      color: scenes1 ? Colors.black : Colors.grey,
-                      fontSize: s.setSp(40),
-                      fontFamily: customFontFamily,
-                      fontWeight: FontWeight.normal),
-                  //textAlign: TextAlign.center,
+              Expanded(
+                child: Container(
+                  alignment: Alignment.centerRight,
+                  padding: EdgeInsets.only(right: 5),
+                  //color: Colors.blue,
+                  child: Icon(
+                    Icons.wb_sunny,
+                    size: 26,
+                    color: scenes1 ? Colors.yellow : Colors.grey,
+                  ),
                 ),
-              )
+              ),
+              Expanded(
+                //margin: EdgeInsets.only(left: 23),
+                child: Container(
+                  padding: EdgeInsets.only(left: 5),
+                  alignment: Alignment.centerLeft,
+                  //color: Colors.amber,
+                  child: Text(
+                    m["name"],
+                    style: TextStyle(
+                        color: scenes1 ? Colors.black : Colors.grey,
+                        fontSize: s.setSp(40),
+                        fontFamily: customFontFamily,
+                        fontWeight: FontWeight.normal),
+                    //textAlign: TextAlign.center,
+                  ),
+                ),
+              ),
             ],
           ),
         ),
-      ),
+
     );
   }
 }

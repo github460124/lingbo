@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lingbo_app/pages/automation_pages/automation_page.dart';
 
 const homeImage = "http://47.102.214.210/image/house.jpg";
 const fontFamily = "SourceHanSansSC";
@@ -136,9 +137,34 @@ class _MyPageBody extends State<MyPageBody> {
       shrinkWrap: true,
       physics: NeverScrollableScrollPhysics(),
       itemBuilder: (context, index) {
-        return myListTitle[index];
+        return getMyListTitle(context, index); //myListTitle[index];
       },
       itemCount: myListTitle.length,
+    );
+  }
+
+  Widget getMyListTitle(BuildContext context, int index) {
+    return Container(
+      padding: EdgeInsets.only(top: listTitlePaddingTop),
+      child: InkWell(
+        //splashColor: Colors.grey,
+        highlightColor: Colors.grey,
+        child: myListTitle[index],
+        onTap: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              settings: RouteSettings(name: "/Automation"),
+                builder: (BuildContext context){
+                return Theme(
+                  data: Theme.of(context).copyWith(platform: Theme.of(context).platform),
+                  child: AutomationPage(),
+                );
+                },
+            )
+          );
+        },
+      ),
     );
   }
 }
@@ -150,108 +176,76 @@ const double listTitleDividerHe = 1; //分割线高度
 
 List<Widget> myListTitle = <Widget>[
   Container(
-    padding: EdgeInsets.only(top: listTitlePaddingTop),
-    child: GestureDetector(
-      onTap: () {
-        print('tap 000');
-      },
-      child: Container(
-        child: Column(
-          children: <Widget>[
-            ListTile(
-              title: Text(
-                'Users',
-                style: TextStyle(fontSize: listTitleSize),
-              ),
-              trailing: Icon(Icons.arrow_forward_ios),
-            ),
-            Divider(
-              color: Colors.grey,
-              height: listTitleDividerHe,
-              indent: 0,
-            ),
-          ],
+    child: Column(
+      children: <Widget>[
+        ListTile(
+          title: Text(
+            'Users',
+            style: TextStyle(fontSize: listTitleSize),
+          ),
+          trailing: Icon(Icons.arrow_forward_ios),
         ),
-      ),
+        Divider(
+          color: Colors.grey,
+          height: listTitleDividerHe,
+          indent: 0,
+        ),
+      ],
     ),
   ),
   Container(
-    padding: EdgeInsets.only(top: listTitlePaddingTop),
-    child: GestureDetector(
-      onTap: () {
-        print('tap 000');
-      },
-      child: Container(
-        child: Column(
-          children: <Widget>[
-            ListTile(
-              title: Text(
-                'Automation',
-                style: TextStyle(fontSize: listTitleSize),
-              ),
-              trailing: Icon(Icons.arrow_forward_ios),
-            ),
-            Divider(
-              color: Colors.grey,
-              height: listTitleDividerHe,
-              indent: 0,
-            ),
-          ],
+    child: Column(
+      children: <Widget>[
+        ListTile(
+          title: Text(
+            'Automation',
+            style: TextStyle(fontSize: listTitleSize),
+          ),
+          trailing: Icon(Icons.arrow_forward_ios),
         ),
-      ),
+        Divider(
+          color: Colors.grey,
+          height: listTitleDividerHe,
+          indent: 0,
+        ),
+      ],
     ),
   ),
   Container(
-    padding: EdgeInsets.only(top: listTitlePaddingTop),
-    child: GestureDetector(
-      onTap: () {
-        print('tap 000');
-      },
-      child: Container(
-        child: Column(
-          children: <Widget>[
-            ListTile(
-              title: Text(
-                'Notifactions',
-                style: TextStyle(fontSize: listTitleSize),
-              ),
-              trailing: Icon(Icons.arrow_forward_ios),
-            ),
-            Divider(
-              color: Colors.grey,
-              height: listTitleDividerHe,
-              indent: 0,
-            ),
-          ],
+    child: Column(
+      children: <Widget>[
+        ListTile(
+          title: Text(
+            'Notifactions',
+            style: TextStyle(fontSize: listTitleSize),
+          ),
+          trailing: Icon(Icons.arrow_forward_ios),
         ),
-      ),
+        Divider(
+          color: Colors.grey,
+          height: listTitleDividerHe,
+          indent: 0,
+        ),
+      ],
     ),
   ),
   Container(
-    padding: EdgeInsets.only(top: listTitlePaddingTop),
-    child: GestureDetector(
-      onTap: () {
-        print('tap 000');
-      },
-      child: Container(
-        child: Column(
-          children: <Widget>[
-            ListTile(
-              title: Text(
-                'Licence',
-                style: TextStyle(fontSize: listTitleSize),
-              ),
-              subtitle: Text('Standard (no remote access)'),
-              trailing: Icon(Icons.arrow_forward_ios),
-            ),
-            Divider(
-              color: Colors.grey,
-              height: listTitleDividerHe,
-              indent: 0,
-            ),
-          ],
+    child: Column(
+      children: <Widget>[
+        ListTile(
+          title: Text(
+            'Licence',
+            style: TextStyle(fontSize: listTitleSize),
+          ),
+          subtitle: Text('Standard (no remote access)'),
+          trailing: Icon(Icons.arrow_forward_ios),
         ),
-      ),
+        Divider(
+          color: Colors.grey,
+          height: listTitleDividerHe,
+          indent: 0,
+        ),
+      ],
     ),
   ),
   Container(
@@ -262,55 +256,39 @@ List<Widget> myListTitle = <Widget>[
     padding: EdgeInsets.only(top: 60, left: 20),
   ),
   Container(
-    padding: EdgeInsets.only(top: listTitlePaddingTop),
-    child: GestureDetector(
-      onTap: () {
-        print('tap 000');
-      },
-      child: Container(
-        child: Column(
-          children: <Widget>[
-            ListTile(
-              title: Text(
-                'About LingBo',
-                style: TextStyle(fontSize: listTitleSize),
-              ),
-              trailing: Icon(Icons.arrow_forward_ios),
-            ),
-            Divider(
-              color: Colors.grey,
-              height: listTitleDividerHe,
-              indent: 0,
-            ),
-          ],
+    child: Column(
+      children: <Widget>[
+        ListTile(
+          title: Text(
+            'About LingBo',
+            style: TextStyle(fontSize: listTitleSize),
+          ),
+          trailing: Icon(Icons.arrow_forward_ios),
         ),
-      ),
+        Divider(
+          color: Colors.grey,
+          height: listTitleDividerHe,
+          indent: 0,
+        ),
+      ],
     ),
   ),
   Container(
-    padding: EdgeInsets.only(top: listTitlePaddingTop),
-    child: GestureDetector(
-      onTap: () {
-        print('tap 000');
-      },
-      child: Container(
-        child: Column(
-          children: <Widget>[
-            ListTile(
-              title: Text(
-                'Legal',
-                style: TextStyle(fontSize: listTitleSize),
-              ),
-              trailing: Icon(Icons.arrow_forward_ios),
-            ),
-            Divider(
-              color: Colors.grey,
-              height: listTitleDividerHe,
-              indent: 0,
-            ),
-          ],
+    child: Column(
+      children: <Widget>[
+        ListTile(
+          title: Text(
+            'Legal',
+            style: TextStyle(fontSize: listTitleSize),
+          ),
+          trailing: Icon(Icons.arrow_forward_ios),
         ),
-      ),
+        Divider(
+          color: Colors.grey,
+          height: listTitleDividerHe,
+          indent: 0,
+        ),
+      ],
     ),
   ),
 ];

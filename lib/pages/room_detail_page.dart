@@ -1,8 +1,8 @@
 import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lingbo_app/widget/scenes_card.dart';
+import 'package:lingbo_app/model/temp_model.dart';
 
 class RoomDetailPage extends StatefulWidget {
   final String roomName;
@@ -101,8 +101,7 @@ class _RoomDetailPageState extends State<RoomDetailPage> {
                             //margin: EdgeInsets.only(top: 10),
                             padding: EdgeInsets.only(top: 10),
                             child: ScenesCard(
-                              icon: Icons.image,
-                              scenesName: "睡眠模式",
+                              sceneList: sence,
                             ),
                           ),
 
