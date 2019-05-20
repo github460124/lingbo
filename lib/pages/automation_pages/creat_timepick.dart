@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:lingbo_app/pages/automation_pages/automation_page.dart';
 import 'package:lingbo_app/pages/automation_pages/create_partspick.dart';
 
 class CreateAutomationTimepick extends StatefulWidget {

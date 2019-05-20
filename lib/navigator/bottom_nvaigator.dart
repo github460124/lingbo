@@ -1,7 +1,14 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:lingbo_app/constans/constant.dart';
+import 'package:lingbo_app/dao/receive_dao.dart';
 import 'package:lingbo_app/pages/home_page.dart';
 import 'package:lingbo_app/pages/my_page.dart';
 import 'package:lingbo_app/pages/room_page.dart';
+import 'package:lingbo_app/dao/overall_dao.dart';
+import 'package:lingbo_app/model/overall_info_model.dart';
+import 'package:lingbo_app/util/initUtil.dart';
 
 class BottomNavigator extends StatefulWidget {
   @override
@@ -12,9 +19,57 @@ class _BottomNavigatorState extends State<BottomNavigator> {
   final PageController _controller = PageController(
     initialPage: 0,
   );
+  OverallInfoEntity overallInfoEntity;
+  Future<Socket> socket;
+  @override
+  void initState() {
+    super.initState();
+    initOverall();
+    socket=init();
+    SocketUtil.socket=socket;
+    Init.deviceSocketInit();
+  }
+  Future<Socket> init()async{
+    await SocketUtil.init();
+    return SocketUtil.conn;
+  }
+
+  initOverall()async{
+   overallInfoEntity=await overallInfoDao.fetch();
+  }
   final _defaultColor = Colors.grey;
   final _activeColor = Colors.blue;
   int _currentIndex = 0;
+
+  List overallInfo =[
+    {
+      "name": "卧室",
+      "index": 0,
+      "device": [
+        {"name": "light1", "state": 0, "dim": 1},
+        {"name": "light2", "state": 1, "dim": 0},
+        {"name": "light3", "state": 0, "dim": 0}
+      ]
+    },
+    {
+      "name": "客厅",
+      "index": 0,
+      "device": [
+        {"name": "light4", "state": 1, "dim": 0},
+        {"name": "light5", "state": 1, "dim": 1},
+        {"name": "light6", "state": 0, "dim": 0}
+      ]
+    },
+    {
+      "name": "书房",
+      "index": 0,
+      "device": [
+        {"name": "light7", "state": 0, "dim": 0},
+        {"name": "light8", "state": 1, "dim": 0},
+        {"name": "light9", "state": 1, "dim": 0}
+      ]
+    }
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +85,7 @@ class _BottomNavigatorState extends State<BottomNavigator> {
         children: <Widget>[
           //需要显示的页面
           HomePage(),
-          RoomPage(),
+          RoomPage(overallInfoEntity: overallInfoEntity,socket: socket),
           MyPage(),
         ],
       ),

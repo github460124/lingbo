@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:lingbo_app/pages/monitor_page.dart';
+import 'package:lingbo_app/pages/room_page.dart';
 
 const homeImage = "http://47.102.214.210/image/house.jpg";
 const customFontFamily = "SourceHanSansSC";
 
 ///监控卡片入口
+// ignore: must_be_immutable
 class MonitorCard extends StatelessWidget {
   ScreenUtil s = ScreenUtil();
   @override
@@ -19,10 +22,7 @@ class MonitorCard extends StatelessWidget {
         children: <Widget>[
           _title,
           Container(
-            margin: EdgeInsets.only(
-//                left: s.setWidth(61),
-//                right: s.setWidth(61),
-                top: s.setHeight(100)),
+            margin: EdgeInsets.only(top: s.setHeight(100)),
             child: Card(
               elevation: 2,
               child: SizedBox(
@@ -51,6 +51,9 @@ class MonitorCard extends StatelessWidget {
                             flex: 2,
                             child: IconButton(
                               icon: Icon(Icons.arrow_forward),
+                              onPressed: () {
+                                showMySimpleDialog(context);
+                              },
                             ),
                           ),
                         ],
@@ -85,5 +88,41 @@ class MonitorCard extends StatelessWidget {
             fontWeight: FontWeight.normal),
       ),
     );
+  }
+
+  void showMySimpleDialog(BuildContext context) {
+    showDialog(
+        context: context,
+        builder: (context) {
+          return new SimpleDialog(
+            title: Text('请选择'),
+            children: <Widget>[
+              new SimpleDialogOption(
+                child: new Text("大会议室"),
+                onPressed: () {
+                  Navigator.push(context,MaterialPageRoute(builder: (context)=>MonitorPage(index: 1,)));
+                },
+              ),
+              new SimpleDialogOption(
+                child: new Text("小会议室"),
+                onPressed: () {
+                  Navigator.push(context,MaterialPageRoute(builder: (context)=>MonitorPage(index: 2,)));
+                },
+              ),
+              new SimpleDialogOption(
+                child: new Text("电梯厅(电动门)"),
+                onPressed: () {
+                  Navigator.push(context,MaterialPageRoute(builder: (context)=>MonitorPage(index: 3,)));
+                },
+              ),
+              new SimpleDialogOption(
+                child: new Text("电梯厅(外侧)"),
+                onPressed: () {
+                  Navigator.push(context,MaterialPageRoute(builder: (context)=>MonitorPage(index: 4,)));
+                },
+              ),
+            ],
+          );
+        });
   }
 }

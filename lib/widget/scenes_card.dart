@@ -6,7 +6,6 @@ const customFontFamily = "SourceHanSansSC";
 ///场景卡片入口
 class ScenesCard extends StatefulWidget {
   final List sceneList;
-
   const ScenesCard({Key key, this.sceneList}) : super(key: key);
 
   @override
@@ -14,12 +13,7 @@ class ScenesCard extends StatefulWidget {
 }
 
 class _ScenesCardState extends State<ScenesCard> {
-  bool scenes1 = true;
-  bool scenes2 = false;
-  bool scenes3 = false;
-  bool scenes4 = false;
   ScreenUtil s = ScreenUtil();
-
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
@@ -30,66 +24,33 @@ class _ScenesCardState extends State<ScenesCard> {
           children: <Widget>[
             _title, //卡片标题
             Container(
+              height: 150,
               margin: EdgeInsets.only(top: s.setHeight(60)),
               //color: Color(0xffeae8e9),
               alignment: Alignment.center,
               child: GridView.count(
                 shrinkWrap: true,
-                crossAxisCount: 2,//每行item数量
-                physics: NeverScrollableScrollPhysics(),
-                mainAxisSpacing: 10,  //主轴间隔
+                primary: false,
+                crossAxisCount: 2, //每行item数量
+                //physics: NeverScrollableScrollPhysics(),
+                scrollDirection: Axis.horizontal,
+                mainAxisSpacing: 10, //主轴间隔
                 crossAxisSpacing: 10,
-                childAspectRatio: 3 / 1,  //item宽高比
+                childAspectRatio: 1 / 3, //item宽高比
                 padding: EdgeInsets.all(5),
-                children: cardWidgetList,
+                children: widget.sceneList.map((m){
+                  return _scenesCard(m, widget.sceneList.indexOf(m));
+                }).toList(),
               ),
-              /*Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: <Widget>[
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: <Widget>[
-                      _scenesCard(widget.sceneList[0]),
-                      Container(
-                        padding: EdgeInsets.only(left: s.setWidth(34)),
-                        child: _scenesCard(widget.sceneList[1]),
-                      ),
-                    ],
-                  ),
-                  Container(
-                    margin: EdgeInsets.only(top: s.setHeight(25)),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: <Widget>[
-                        _scenesCard(widget.sceneList[2]),
-                        Container(
-                          padding: EdgeInsets.only(left: s.setWidth(34)),
-                          child: _scenesCard(widget.sceneList[3]),
-                        )
-                      ],
-                    ),
-                  ),
-                ],
-              ),*/
             ),
-          ]
-      ),
+          ]),
     );
   }
 
-  List<Widget> cardWidgetList = new List();
   @override
   void initState() {
     super.initState();
-    initCardWidgetList();
   }
-
-  void initCardWidgetList() {
-    widget.sceneList.forEach((m) {
-      cardWidgetList.add(_scenesCard(m));
-    });
-  }
-
   Widget get _title {
     return Container(
       color: Colors.white,
@@ -107,14 +68,20 @@ class _ScenesCardState extends State<ScenesCard> {
     );
   }
 
-  Widget _scenesCard(Map m) {
+  Widget _scenesCard(Map m, int index) {
     return InkWell(
       splashColor: Colors.grey[300],
-      onTap: () {},
+      onTap: (){
+        setState(() {
+          widget.sceneList.forEach((f){f["state"]=false;});
+          widget.sceneList[index]['state']=true;
+        });
+      },
       //elevation: 2,
       //decoration: BoxDecoration(border: Border.all(width: 0.1)),
-      child: Container(
-          decoration: BoxDecoration(border: Border.all(width: 0.1),color: Colors.grey[200]),
+      child: Card(
+        child: Container(
+          //decoration: BoxDecoration(border: Border.all(width: 0.1)),
           color: Colors.white,
           alignment: Alignment.center,
           //margin: EdgeInsets.fromLTRB(s.setWidth(134), 0, 0, 0),
@@ -127,9 +94,9 @@ class _ScenesCardState extends State<ScenesCard> {
                   padding: EdgeInsets.only(right: 5),
                   //color: Colors.blue,
                   child: Icon(
-                    Icons.wb_sunny,
+                    IconData(m['icon'], fontFamily: 'MaterialIcons'),
                     size: 26,
-                    color: scenes1 ? Colors.yellow : Colors.grey,
+                    color: widget.sceneList[index]['state'] ? Color(widget.sceneList[index]["color"]) : Colors.grey,
                   ),
                 ),
               ),
@@ -142,7 +109,7 @@ class _ScenesCardState extends State<ScenesCard> {
                   child: Text(
                     m["name"],
                     style: TextStyle(
-                        color: scenes1 ? Colors.black : Colors.grey,
+                        color: widget.sceneList[index]['state'] ? Colors.black : Colors.grey,
                         fontSize: s.setSp(40),
                         fontFamily: customFontFamily,
                         fontWeight: FontWeight.normal),
@@ -153,7 +120,7 @@ class _ScenesCardState extends State<ScenesCard> {
             ],
           ),
         ),
-
+      ),
     );
   }
 }

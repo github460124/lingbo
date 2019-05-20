@@ -1,8 +1,11 @@
+import 'dart:io';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lingbo_app/dao/get_ip_dao.dart';
 import 'package:lingbo_app/dao/position_dao.dart';
+import 'package:lingbo_app/dao/receive_dao.dart';
 import 'package:lingbo_app/dao/weather_dao.dart';
 import 'package:lingbo_app/model/position_model.dart';
 import 'package:lingbo_app/model/get_ip_model.dart';
@@ -32,8 +35,10 @@ class _HomePageState extends State<HomePage> {
   String text;
   WeatherModelResultsNow weatherinfo;
 
+  Future<Socket> socket;
+
   var flutterLocalNotificationsPlugin = new FlutterLocalNotificationsPlugin();
-  MyLocalNotification myLocalNotification=new MyLocalNotification();
+  MyLocalNotification myLocalNotification = new MyLocalNotification();
   @override
   void initState() {
     super.initState();
@@ -76,14 +81,6 @@ class _HomePageState extends State<HomePage> {
     DioWeather.fetch().then((result) {
       setState(() {
         weatherinfo = result.now;
-        /*if (weatherinfo.code == null)
-          code = 'null';
-        else
-          code = weatherinfo.code;
-        if (weatherinfo.temperature == null)
-          temp = 'null';
-        else
-          temp = weatherinfo.temperature;*/
         code = weatherinfo.code;
         temp = weatherinfo.temperature;
         text = weatherinfo.text;
@@ -98,58 +95,70 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     ScreenUtil.instance = ScreenUtil()..init(context);
     // TODO: implement build
-    return Scaffold(
-      backgroundColor: Colors.white,
-      appBar: AppBar(
-        title: WeatherWidget(
-          code: code,
-          temp: temp,
-          text: text,
+    return Material(
+      child: Scaffold(
+        backgroundColor: Colors.white,
+        appBar: AppBar(
+          elevation: 0,
+          title: WeatherWidget(
+            code: code,
+            temp: temp,
+            text: text,
+          ),
+          actions: <Widget>[
+            Container(
+              padding: EdgeInsets.only(right: 20),
+              child: IconButton(icon: Icon(Icons.more_horiz), onPressed: (){}),
+            ),
+          ],
+          //centerTitle: true,
         ),
-        //centerTitle: true,
-      ),
-      body: Stack(
-        children: <Widget>[
-          MediaQuery.removePadding(
-            removeTop: true,
-            //removeLeft: true,
-            context: context,
-            child: CustomScrollView(
-              shrinkWrap: true,
-              slivers: <Widget>[
-                SliverPadding(
-                  padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
-                  sliver: SliverList(
-                    delegate: SliverChildListDelegate(
-                      <Widget>[
-                        Container(
-                          child: Column(
-                            children: <Widget>[
-                              Container(
-                                child: HomeTopContainer(),
-                              ),
-                              Container(
-                                child: ScenesCard(
-                                  sceneList: sence,
+        body: Stack(
+          children: <Widget>[
+            MediaQuery.removePadding(
+              removeTop: true,
+              //removeLeft: true,
+              context: context,
+              child: CustomScrollView(
+                shrinkWrap: true,
+                slivers: <Widget>[
+                  SliverPadding(
+                    padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
+                    sliver: SliverList(
+                      delegate: SliverChildListDelegate(
+                        <Widget>[
+                          Container(
+                            child: Column(
+                              children: <Widget>[
+                                Container(
+                                  child: HomeTopContainer(),
                                 ),
-                              ),
-                              Container(
-                                child: SecurityCard(onTap1: onTap1,onTap2: onTap2,),
-                              ),
-                              Container(
-                                child: MonitorCard(),
-                              ),
-                            ],
+                                Container(
+                                  child: ScenesCard(
+                                    sceneList: sence,
+                                  ),
+                                ),
+                                Container(
+                                  child: SecurityCard(
+                                    onTap1: onTap1,
+                                    onTap2: onTap2,
+                                  ),
+                                ),
+                                Container(
+                                  child: MonitorCard(),
+                                ),
+                              ],
+                            ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
@@ -251,9 +260,10 @@ class _HomePageState extends State<HomePage> {
   }
 
   onTap1() {
-    myLocalNotification.showNotification("1",' 来自安防1的消息','安防1已布防');
+    myLocalNotification.showNotification("1", ' 来自安防1的消息', '安防1已布防');
   }
+
   onTap2() {
-    myLocalNotification.showNotification("1",' 来自安防2的消息','安防2已布防');
+    myLocalNotification.showNotification("1", ' 来自安防2的消息', '安防2已布防');
   }
 }

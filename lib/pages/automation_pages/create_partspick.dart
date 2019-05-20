@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lingbo_app/pages/automation_pages/creat_temp.dart';
 import 'package:flutter_fluid_slider/flutter_fluid_slider.dart';
-import 'package:side_header_list_view/side_header_list_view.dart';
 
 class CreateAutomationScenes extends StatefulWidget {
   final String title;
@@ -182,7 +181,6 @@ class GetBody extends StatefulWidget {
   }
 }
 
-double _value = 0.0;
 
 class GetBodyState extends State<GetBody> {
   @override

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:lingbo_app/model/weather_model_entity.dart';
 
 class WeatherWidget extends StatelessWidget{
   final String code ;
@@ -15,8 +14,8 @@ class WeatherWidget extends StatelessWidget{
       Container(
       child: Row(
         children: <Widget>[
-          Text("$text",style: TextStyle(fontSize: 18),),
-          Container(padding: EdgeInsets.only(left: 5),child: Text('$temp℃',style: TextStyle(fontSize: 14),),),
+          Text("$text",style: TextStyle(fontSize: 18,color: Colors.black),),
+          Container(padding: EdgeInsets.only(left: 5),child: Text('$temp℃',style: TextStyle(fontSize: 14 ,color: Colors.black),),),
 
         ],
       ),

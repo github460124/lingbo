@@ -1,9 +1,7 @@
-import 'dart:convert';
-
 import 'package:dio/dio.dart';
 import 'package:lingbo_app/model/weather_model_entity.dart';
 main(){
-  DioWeather.fetch();
+  //DioWeather.fetch();
 }
 class DioWeather{
   static var dio = new Dio();

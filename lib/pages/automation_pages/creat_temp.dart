@@ -33,9 +33,17 @@ class CreateAutomationPartpickState extends State<CreateAutomationPartpick> {
         centerTitle: true,
       ),
       body: Container(
-        child: Text(widget.commitInfoMap.toString()),
+        //child: Text(widget.commitInfoMap.toString()),
       ),
     );
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    widget.commitInfoMap.forEach((f,e){
+      print('$f:$e\n');
+    });
   }
 
   getDevice(int i) {
